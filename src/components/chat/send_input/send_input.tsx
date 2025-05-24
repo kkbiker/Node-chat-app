@@ -6,7 +6,7 @@ export function SendInput() {
 
   return (
     <div className={styles.container}>
-      <input type="text" value={message ?? ""} onChange={(e) => setMessage(e.target.value)} />
+      <input type="text" value={message ?? ""} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)} />
       <button type="button" onClick={() => handleSend()}>送信</button>
     </div>
   );

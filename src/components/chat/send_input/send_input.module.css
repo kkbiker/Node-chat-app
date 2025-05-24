@@ -13,6 +13,10 @@
     color: #070707;
 }
 
+.container input {
+    width: 28rem;
+}
+
 .container button {
     background: #0ff;
 }

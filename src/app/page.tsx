@@ -1,17 +1,15 @@
-'use client';
-
-import { SendInput } from "@/component/chat/send_input/send_input";
-import { Messages } from "@/component/chat/messages/messages";
-import { ChatProvider } from "../context/Chat/ChatContext";
+import Link from "next/link";
 import styles from "./Home.module.css";
 
 export default function Home() {
   return (
     <main className={styles.container}>
-      <ChatProvider>
-        <SendInput />
-        <Messages />
-      </ChatProvider>
+      <h1>Welcome My App</h1>
+      <section className={styles.links}>
+        <ul>
+          <li><Link href={"chat"}>チャット機能はこちら</Link></li>
+        </ul>
+      </section>
     </main>
   );
 }

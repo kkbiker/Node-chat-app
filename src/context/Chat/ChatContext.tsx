@@ -1,5 +1,6 @@
 'use client';
 
+import axios from "axios";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
@@ -8,16 +9,20 @@ const socket = io(process.env.NEXT_PUBLIC_NODE_API_URL);
 type ChatContext = {
   message: string,
   setMessage: (value: string) => void,
-  messages: string[],
-  setMessages: (value: string[]) => void,
+  messages: Message[],
+  setMessages: (value: Message[]) => void,
   handleSend: () => void
 }
 
 const ChatContext = createContext<ChatContext | null>(null);
 
+type Message = {
+  message: string
+}
+
 export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
-  const [message, setMessage] = useState<string>("");
-  const [messages, setMessages] = useState<string[]>([]);
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const handleSend = useCallback(() => {
     socket.emit("send-message", { message: message });
@@ -25,8 +30,21 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   }, [message]);
 
   useEffect(() => {
-    const listener = (data: {message: string}) => {
-      setMessages((prev) => [...prev, data.message]);
+    const getMessages = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_NODE_API_URL}/chat`);
+        setMessages(res.data);
+      } catch (err) {
+        console.error("メッセージの取得に失敗しました。", err);
+      }
+    }
+
+    getMessages();
+  }, []);
+
+  useEffect(() => {
+    const listener = (data: { message: string }) => {
+      setMessages((prev) => [...prev, data]);
     }
 
     socket.on("receive-message", listener);

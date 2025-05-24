@@ -8,3 +8,9 @@
     height: 100dvh;
 }
 
+.chatArea {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    width: fit-content;
+}
