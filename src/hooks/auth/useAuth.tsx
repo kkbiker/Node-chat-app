@@ -31,34 +31,34 @@ export const useAuth = () => {
 
   const handleCompanyName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    value.trim().length > 0 ? setIsCompanyNameEmpty(false) : setIsCompanyNameEmpty(true);
-    value.trim().length > 50 ? setIsCompanyNameSize(true) : setIsCompanyNameSize(false);
+    setIsCompanyNameEmpty(!(value.trim().length > 0));
+    setIsCompanyNameSize(!(value.trim().length > 50));
     setCompanyName(value);
   }, []);
 
   const handleCompanyId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    value.trim().length > 0 ? setIsCompanyIdEmpty(false) : setIsCompanyIdEmpty(true);
+    setIsCompanyIdEmpty(!(value.trim().length > 0));
     setCompanyId(value);
   }, []);
 
   const handleName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    value.trim().length > 0 ? setIsNameEmpty(false) : setIsNameEmpty(true);
-    value.length > 20 ? setIsNameSize(true) : setIsNameSize(false);
+    setIsNameEmpty(!(value.trim().length > 0));
+    setIsNameSize(!(value.length > 20));
     setName(value);
   }, []);
 
   const handleEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    value.trim().length > 0 ? setIsEmailEmpty(false) : setIsEmailEmpty(true);
+    setIsEmailEmpty(!(value.trim().length > 0));
     setEmail(e.target.value);
   }, []);
 
   const handlePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    value.trim().length > 0 ? setIsPasswordEmpty(false) : setIsPasswordEmpty(true);
-    value.length > 50 ? setIsPasswordSize(true) : setIsPasswordSize(false);
+    setIsPasswordEmpty(!(value.trim().length > 0));
+    setIsPasswordSize(!(value.length > 50));
     setPassword(e.target.value.trim());
   }, []);
 
@@ -91,7 +91,7 @@ export const useAuth = () => {
     axios
       .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/register`, { companyName, companyId, name, email, password })
       .then(() => {
-        router.push("/chat")
+        router.push("/chat");
       })
       .catch(() => {
         setRegistErr(true);
