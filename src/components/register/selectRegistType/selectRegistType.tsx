@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { useRegisterContext } from "@/context/Register/RegisterContext";
 import styles from "./selectRegistType.module.css";
 

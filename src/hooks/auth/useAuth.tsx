@@ -68,7 +68,7 @@ export const useAuth = () => {
     let haserror = false;
 
     if (isMaster) {
-      if(companyName.trim() === "" || isCompanyNameSize) {
+      if (companyName.trim() === "" || isCompanyNameSize) {
         setIsCompanyNameEmpty(companyName.trim() === "");
         haserror = true;
       }
@@ -100,7 +100,7 @@ export const useAuth = () => {
           setRegistErr(false);
         }, 3000);
       });
-  }, [companyName, companyId, name, email, password]);
+  }, [isMaster, companyName, isCompanyNameSize, companyId, name, isNameSize, email, password, isPasswordSize, router]);
 
   const handleLogin = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -119,7 +119,7 @@ export const useAuth = () => {
           setLoginErr(false);
         }, 3000);
       });
-  }, [email, password]);
+  }, [email, password, router]);
 
   return {
     isMaster,

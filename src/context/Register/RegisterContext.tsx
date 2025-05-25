@@ -1,6 +1,5 @@
-import { useAuth } from "@/hooks/auth/useAuth";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/auth/useAuth";
 import { createContext, useCallback, useContext, useState } from "react";
 
 type RegisterContext = {
