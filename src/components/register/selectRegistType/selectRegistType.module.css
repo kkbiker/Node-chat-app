@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: fit-content;
+    padding: 6.4rem 2.4rem;
+    border: solid 1px var(--foreground);
+    border-radius: 2rem
+}
+
+.container h3 {
+    width: 100%;
+    padding-bottom: 1.6rem;
+    border-bottom: solid 1px var(--foreground);
+    text-align: center;
+}
+
+.container p {
+    width: 28rem;
+    text-align: start;
+}
+
+.selecter {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 28rem;
+    padding: 0;
+    border-radius: 2rem;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.selecter:hover {
+    padding: 2.4rem 1.2rem;
+    background: #0ff;
+    color: #070707;
+}
+
+.selecter p {
+    width: 100%;
+}
+
+.selecter p span {
+    font-size: 1.6rem;
+}

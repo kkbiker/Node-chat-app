@@ -7,7 +7,9 @@ export default function Home() {
       <h1>Welcome My App</h1>
       <section className={styles.links}>
         <ul>
-          <li><Link href={"chat"}>チャット機能はこちら</Link></li>
+          <li><Link href={"/login"}>ログインはこちら</Link></li>
+          <li><Link href={"/register"}>ユーザー登録はこちら</Link></li>
+          <li><Link href={"/chat"}>チャット機能はこちら</Link></li>
         </ul>
       </section>
     </main>

@@ -7,10 +7,9 @@
 .container input,
 .container button {
     padding: .8rem 1.6rem;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     line-height: 1.6rem;
     border-radius: 3.2rem;
-    color: #070707;
 }
 
 .container input {

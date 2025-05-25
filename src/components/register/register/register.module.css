@@ -1,0 +1,106 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: fit-content;
+    padding: 6.4rem 2.4rem;
+    border: solid 1px var(--foreground);
+    border-radius: 2rem
+}
+
+.container h3{
+    width: 100%;
+    padding-bottom: 1.6rem;
+    border-bottom: solid 1px var(--foreground);
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.form div {
+    position: relative;
+}
+
+.form div h6 {
+    position: relative;
+    padding-left: 2.4rem;
+}
+
+.form div h6::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: .4rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: solid 1px var(--foreground);
+    border-radius: 1.2rem;
+    transform: translateY(-50%);
+}
+
+.form div h6::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: .7rem;
+    width: .8rem;
+    height: .8rem;
+    background: var(--foreground);
+    border-radius: 1.2rem;
+    transform: translateY(-50%);
+}
+
+.form div input {
+    width: 28rem;
+    padding: .8rem 1.6rem;
+    border-radius: 3.2rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+
+.form div>div button {
+    position: absolute;
+    top: 50%;
+    right: .4rem;
+    padding: .8rem 1.2rem;
+    background: #0f0;
+    border-radius: 2.8rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    transform: translateY(-50%);
+}
+
+.btnBx {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.6rem;
+}
+
+.btnBx button {
+    padding: .8rem 1.6rem;
+    background: #0ff;
+    border-radius: 3.2rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+
+.error {
+    color: #f00;
+}
+
+.email {
+    width: 28rem;
+    padding: .8rem 1.6rem;
+    border: solid 1px var(--foreground);
+    border-radius: 3.2rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
