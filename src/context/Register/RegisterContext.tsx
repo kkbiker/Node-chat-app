@@ -84,7 +84,7 @@ export const RegisterProvider = ({ children }: { children: React.ReactNode }) =>
 
   const handleInputCode = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    value.trim().length > 0 ? setIsCodeEmpty(false) : setIsCodeEmpty(true);
+    setIsCodeEmpty(!(value.trim().length > 0));
     setInputCode(value);
   }, []);
 

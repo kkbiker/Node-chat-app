@@ -32,7 +32,7 @@ export const useAuth = () => {
   const handleCompanyName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setIsCompanyNameEmpty(!(value.trim().length > 0));
-    setIsCompanyNameSize(!(value.trim().length > 50));
+    setIsCompanyNameSize(value.trim().length > 50);
     setCompanyName(value);
   }, []);
 
@@ -45,7 +45,7 @@ export const useAuth = () => {
   const handleName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setIsNameEmpty(!(value.trim().length > 0));
-    setIsNameSize(!(value.length > 20));
+    setIsNameSize(value.length > 20);
     setName(value);
   }, []);
 
@@ -58,7 +58,7 @@ export const useAuth = () => {
   const handlePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setIsPasswordEmpty(!(value.trim().length > 0));
-    setIsPasswordSize(!(value.length > 50));
+    setIsPasswordSize(value.length > 50);
     setPassword(e.target.value.trim());
   }, []);
 
