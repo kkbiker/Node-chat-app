@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./list.module.css";
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function List() {
 
@@ -28,7 +28,7 @@ export function List() {
     isPublic: boolean
   }
 
-  const [articles, setArticles] = useState<ArticleList[]>([]);
+  // const [articles, setArticles] = useState<ArticleList[]>([]);
 
   // useEffect(() => {
   //   axios
@@ -148,7 +148,7 @@ export function List() {
         { params: { name } }
       )
       .then((res) => {
-
+        console.log(res.data)
       })
       .catch((err) => console.error(err));
   }

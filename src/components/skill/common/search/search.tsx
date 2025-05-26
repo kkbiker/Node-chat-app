@@ -1,14 +1,14 @@
 'use client';
 
 import { useSkillContext } from "@/context/Skill/SkillContext";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import styles from "./search.module.css";
 import axios from "axios";
 import { GenreList } from "../genreList/genreList";
 
 export function Search() {
-  const { isPost, isPreview, isArticleEdit, setIsArticleList, setIsArticleGenre, setGenre, handleReset } = useSkillContext();
+  const { isPost, isPreview, isArticleEdit, setIsArticleList, setIsArticleGenre, handleReset } = useSkillContext();
 
   const [search, setSearch] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
@@ -34,13 +34,13 @@ export function Search() {
       .get(`${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/search`,
         { params: { search } }
       )
-      .then((res) => {
+      .then(() => {
         handleReset();
         setIsArticleList(false);
         setIsArticleGenre(true);
       })
       .catch((err) => console.error(err));
-  }, [search]);
+  }, [search, handleReset, setIsArticleList, setIsArticleGenre]);
 
   return (
     <>
