@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    width: 100%;
+    max-width: 84rem;
+    margin: 2.4rem 0;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+.genre,
+.title,
+.description  {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.title input {
+    width: 100%;
+    padding: .8rem;
+    background: transparent;
+    border: solid 1px var(--foreground);
+    border-radius: .8rem;
+    color: var(--foreground);
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+}
+
+.description textarea {
+    width: 100%;
+    padding: .8rem;
+    background: transparent;
+    border: solid 1px var(--foreground);
+    border-radius: .8rem;
+    color: var(--foreground);
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.img {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.img div {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.img div input::file-selector-button {
+    padding: .4rem 2.4rem;
+    background: #DADADA;
+    border-radius: 2.4rem;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    cursor: pointer;
+}
+
+.img div button {
+    padding: .4rem 2.4rem;
+    background: #FF7272;
+    border-radius: 2.4rem;
+    color: #FAFAFA;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    cursor: pointer;
+}
+
+.add {
+    margin: 0 0 0 auto;
+}
+
+.add button {
+    padding: 1.2rem;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    border-radius: 4rem;
+    background: transparent;
+    border: solid 1px var(--foreground);
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.add button:hover {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+.errormessage {
+    color: #FF7272;
+}

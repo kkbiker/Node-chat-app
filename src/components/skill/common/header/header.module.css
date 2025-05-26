@@ -1,0 +1,42 @@
+.container {
+    position: sticky;
+    top: 6rem;
+    left: 0;
+    z-index: 100000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: .8rem 2.4rem;
+    background: var(--background);
+}
+
+.container h3 {
+    cursor: pointer;
+}
+
+.container button {
+    padding: .4rem 1.6rem;
+    background: #0ff;
+    border: none;
+    border-radius: 2.4rem;
+    color: #070707;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    cursor: pointer;
+}
+
+.container .pink {
+    background: #F878E6;
+    color: #fafafa;
+}
+ 
+.logoBx {
+    display: flex;
+    gap: 1.6rem;
+}
+
+.contentBx {
+    display: flex;
+    gap: 1.6rem;
+}

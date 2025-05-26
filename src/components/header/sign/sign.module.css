@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    gap: 1.6rem;    
+}
+
+.container a {
+    padding: .6rem 1.6rem;
+    background: #0ff;
+    border-radius: 3.2rem;
+    color: #070707;
+    cursor: pointer;
+}

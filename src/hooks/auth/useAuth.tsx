@@ -1,11 +1,11 @@
 'use client';
 
+import { useNavContext } from "@/context/Header/NavContext";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
 export const useAuth = () => {
-  const router = useRouter();
+  const { handleSkill } = useNavContext();
 
   const [isMaster, setIsMaster] = useState(false);
   const [companyName, setCompanyName] = useState("");
@@ -91,7 +91,7 @@ export const useAuth = () => {
     axios
       .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/register`, { companyName, companyId, name, email, password })
       .then(() => {
-        router.push("/chat");
+        handleSkill();
       })
       .catch(() => {
         setRegistErr(true);
@@ -100,7 +100,7 @@ export const useAuth = () => {
           setRegistErr(false);
         }, 3000);
       });
-  }, [isMaster, companyName, isCompanyNameSize, companyId, name, isNameSize, email, password, isPasswordSize, router]);
+  }, [isMaster, companyName, isCompanyNameSize, companyId, name, isNameSize, email, password, isPasswordSize]);
 
   const handleLogin = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -108,9 +108,8 @@ export const useAuth = () => {
     axios
       .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/login`, { email, password })
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
-        router.push("/chat");
+        handleSkill();
       })
       .catch(() => {
         setLoginErr(true);
@@ -119,7 +118,7 @@ export const useAuth = () => {
           setLoginErr(false);
         }, 3000);
       });
-  }, [email, password, router]);
+  }, [email, password]);
 
   return {
     isMaster,

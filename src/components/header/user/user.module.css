@@ -1,0 +1,78 @@
+.container {
+    position: fixed;
+    top: 50%;
+    right: 2.4rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 6.4rem 2.4rem;
+    background: var(--background);
+    border: solid 1px var(--foreground);
+    border-radius: 2rem;
+    transform: translateY(-50%);
+}
+
+.container td {
+    font-size: 1.2rem;
+}
+
+.container td:nth-child(even) {
+    padding-left: 1.2rem;
+}
+
+.imgBx {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+    border: solid 1px var(--foreground);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.logout a {
+    padding: .6rem 1.6rem;
+    background: #0ff;
+    border-radius: 3.2rem;
+    color: #070707;
+    cursor: pointer;
+}
+
+.logout button {
+    position: relative;
+    width: 2.4rem;
+    height: 2.4rem;
+    background: transparent;
+    border: solid 1px var(--foreground);
+    border-radius: 50%;
+}
+
+.logout button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 1px;
+    background: var(--foreground);
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.logout button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 1px;
+    background: var(--foreground);
+    transform: translate(-50%, -50%) rotate(-45deg);
+}

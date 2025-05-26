@@ -1,0 +1,77 @@
+'use client';
+
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+import { useSkillContext } from "@/context/Skill/SkillContext";
+import { Header } from "./header/header";
+import styles from "./preview.module.css";
+
+export function Preview() {
+  const { articleId } = useSkillContext();
+
+  type Article = {
+    subgenreId: number
+    subgenreName: string
+    userName: string,
+    id: number,
+    title: string,
+    description: string,
+    aImgPath: string,
+    isEdit: boolean,
+    isPublic: boolean,
+    createAt: string,
+    subArticles: SubArticle[],
+    favoriteCount: number
+  }
+
+  type SubArticle = {
+    subTitle: string,
+    content: string,
+    saImgPath: string
+  }
+
+  const [article, setArticle] = useState<Article>();
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/findArticleByid`, { params: { articleId } })
+      .then((res) => {
+        setArticle(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, [articleId]);
+
+  return (
+    <>
+      <Header />
+      <section className={styles.container}>
+        <div className={styles.article}>
+          <div className={styles.title}>
+            <p>{article?.subgenreName}</p>
+            <h3>{article?.title}</h3>
+          </div>
+          <div>
+            <p>投稿者:{article?.userName}</p>
+            <p>投稿日:{article?.createAt}</p>
+            <p>★{article?.favoriteCount}</p>
+          </div>
+        </div>
+        <p>{article?.description}</p>
+        {article?.aImgPath && <div className={styles.ImgBx}><img src={`${process.env.NEXT_PUBLIC_JAVA_API_URL}/img/${article?.aImgPath}`} /></div>}
+        {Array.isArray(article?.subArticles) &&
+          article.subArticles.map((subarticle, index) => (
+            <div key={index} className={styles.subarticle}>
+              <h4>・{subarticle.subTitle}</h4>
+              <p>{subarticle.content}</p>
+              {subarticle.saImgPath && (
+                <div className={styles.ImgBx}>
+                  <img src={`${process.env.NEXT_PUBLIC_JAVA_API_URL}/img/${subarticle.saImgPath}`} />
+                </div>
+              )}
+            </div>
+          ))}
+      </section>
+    </>
+  );
+}

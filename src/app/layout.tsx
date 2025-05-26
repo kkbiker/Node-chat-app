@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import { NavProvider } from "@/context/Header/NavContext";
+import { Header } from "@/component/header/header";
+
 export const metadata: Metadata = {
   title: "Node chat app",
   description: "Node.jsで初めて作ったリアルタイムチャットアプリです。",
@@ -14,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        {children}
+        <NavProvider>
+          <Header />
+          {children}
+        </NavProvider>
       </body>
     </html>
   );

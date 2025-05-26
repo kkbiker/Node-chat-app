@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    gap: 1.6rem;
+}
+
+.container div {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+}
+
+.container div.select::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    height: 20%;
+    background: #0ff;
+    box-shadow: 4px 4px 12px #0ff, -4px -4px 12px #0ff, 4px -4px 12px #0ff, -4px 4px 12px #0ff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.user {
+    border: solid 1px var(--foreground);
+    border-radius: 4rem;
+    overflow: hidden;
+}

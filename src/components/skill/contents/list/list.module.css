@@ -1,0 +1,100 @@
+.genres {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6.4rem;
+    margin-top: 3.2rem;
+}
+
+.genre {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.genre h2 span {
+    margin-left: 1.2rem;
+}
+
+.contents {
+    display: flex;
+    gap: 4.8rem;
+    flex-wrap: wrap;
+    max-width: 83.2rem;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1.6rem;
+    padding: .8rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.content:hover {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+.imgBx {
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+}
+
+.contentBx {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    width: 24rem;
+}
+
+.contentBx div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.contentBx div p:nth-child(even) {
+    padding: .4rem 1.6rem;
+    background: #0ff;
+    border-radius: 2rem;
+    color: #070707;
+}
+
+.contentBx div p:nth-child(even).pink {
+    background: #F878E6;
+    color: #fafafa;
+}
+
+.contents .btnBx {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 12rem;
+    padding: 0 .8rem;
+}
+
+.contents .btnBx button {
+    padding: 1.2rem;
+    background: transparent;
+    border: solid 1px var(--foreground);
+    border-radius: 4.8rem;
+    color: var(--foreground);
+    font-size: 2.4rem;
+    cursor: pointer;
+}
+
+.contents .btnBx button:hover {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+.contents .btnBx button span {
+    margin-right: 3.2rem;
+    font-size: 2.4rem;
+}
