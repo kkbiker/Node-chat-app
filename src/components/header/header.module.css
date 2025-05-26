@@ -1,0 +1,29 @@
+.header {
+    position: fixed;
+    z-index: 1000000;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    box-shadow: 0 4px 8px var(--foreground);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 128rem;
+    height: 6rem;
+    padding: 0 2.4rem;
+    background: var(--background);
+}
+
+.imgBx {
+    position: relative;
+    width: 8rem;
+    height: 4rem;
+}

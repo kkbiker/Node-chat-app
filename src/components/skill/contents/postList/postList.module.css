@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6.4rem;
+    max-width: 84rem;
+    margin-top: 3.2rem;
+}
+
+.content {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.6rem;
+    padding: .8rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.content:hover {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+.content:hover .imgBx {
+    border-color: var(--background);
+}
+
+.imgBx {
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+    border: solid 1px var(--foreground);
+    border-radius: 2rem;
+}
+
+.imgBx p {
+    text-align: center;
+    line-height: 12rem;
+}
+
+.contentBx {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.contentBx div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contentBx div p:nth-child(even) {
+    padding: .4rem 1.6rem;
+    background: #0ff;
+    border-radius: 2rem;
+    color: #070707;
+}
+
+.contentBx div p:nth-child(even).pink {
+    background: #F878E6;
+    color: #fafafa;
+}
+
+.contentBx div p:nth-child(even).yellow {
+    background: #FFEC00;
+}

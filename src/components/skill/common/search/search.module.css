@@ -1,0 +1,111 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 1.6rem 2.4rem;
+}
+
+.genres {
+    position: relative;
+}
+
+.genres>div {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    width: 32rem;
+    height: fit-content;
+    max-height: 40rem;
+    padding: 2.8rem .8rem;
+    background: var(--background);
+    border: solid 1px var(--foreground);
+    border-radius: 2rem;
+}
+
+.genres>div div {
+    display: flex;
+    flex-direction: column;
+}
+
+.genres>div div h4 {
+    margin: 0;
+    padding: .4rem 1.2rem;
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.genres>div div h4:hover {
+    background: #0ff;
+    color: #070707;
+}
+
+.genres>div div h5 {
+    margin-left: 2.4rem;
+    padding: .4rem 1.2rem;
+    cursor: pointer;
+}
+
+.genres>div div h5:hover {
+    background: #0ff;
+    color: #070707;
+}
+
+.genres button {
+    padding: .8rem 1.6rem;
+    background: transparent;
+    border: solid 1px var(--foreground);
+    border-radius: 3.2rem;
+    color: var(--foreground);
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    cursor: pointer;
+}
+
+.genres button.show {
+    background: var(--foreground);
+    border: solid 1px var(--foreground);
+    color: var(--background);
+}
+
+.inputBx {
+    display: flex;
+    padding: .8rem 1.6rem;
+    border: solid 1px var(--foreground);
+    border-radius: 3.2rem;
+}
+
+.inputBx input {
+    background: transparent;
+    border: none;
+    width: 12rem;
+    height: 1.6rem;
+    color: var(--foreground);
+    font-size: 1.6rem;
+}
+
+.inputBx input:focus {
+    outline: none;
+}
+
+.inputBx button {
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    cursor: pointer;
+}
+
+.container h4 {
+    margin-right: 2.4rem;
+    color: #f00;
+}
