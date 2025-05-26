@@ -4,7 +4,6 @@ import { Header } from "./header/header";
 import { Subpost } from "./subpost/subpost";
 import { useSkillInput } from "@/hooks/skill/useSkillInput";
 import { GenreList } from "../../common/genreList/genreList";
-import { Input } from "../../common/postEdit/input/input";
 import styles from "./post.module.css";
 
 export function Post() {

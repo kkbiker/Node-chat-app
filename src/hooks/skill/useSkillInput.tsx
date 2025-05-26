@@ -21,7 +21,7 @@ export const useSkillInput = () => {
       setIsEditing(true);
       const value = e.target.value;
       setIsTitleEmpty(false);
-      value.length > 50 ? setIsTitleSize(true) : setIsTitleSize(false);
+      setIsTitleSize(value.length > 50);
       setTitle(value);
     }, []);
   
@@ -29,7 +29,7 @@ export const useSkillInput = () => {
       setIsEditing(true);
       const value = e.target.value;
       setIsDescriptionEmpty(false);
-      value.length > 1000 ? setIsDescriptionSize(true) : setIsDescriptionSize(false);
+      setIsDescriptionSize(value.length > 1000);
       setDescription(value);
     }, []);
   
@@ -37,7 +37,7 @@ export const useSkillInput = () => {
       setIsEditing(true);
       const value = e.target.files?.[0];
       if (!value) return;
-      value.size > 5 * 1024 * 1024 ? setFileSizeOver(true) : setFileSizeOver(false);
+      setFileSizeOver(value.size > 5 * 1024 * 1024);
       setTitleImg(value);
     }, []);
   
@@ -72,7 +72,7 @@ export const useSkillInput = () => {
         if (update[index]) update[index].subTitle = value;
         return update;
       });
-    }, []);
+    }, [setIsEditing]);
   
     const handleContent = useCallback((index: number, value: string) => {
       setIsEditing(true);
@@ -81,7 +81,7 @@ export const useSkillInput = () => {
         if (update[index]) update[index].content = value;
         return update;
       });
-    }, []);
+    }, [setIsEditing]);
   
     const handleSubImg = useCallback((index: number, value: File | null) => {
       setIsEditing(true);
@@ -90,7 +90,7 @@ export const useSkillInput = () => {
         if (update[index]) update[index].file = value;
         return update;
       })
-    }, []);
+    }, [setIsEditing]);
   
     const handleDeleteSubImg = useCallback((index: number) => {
       setIsEditing(true);
@@ -106,7 +106,7 @@ export const useSkillInput = () => {
       if (inputRef) {
         inputRef.value = "";
       }
-    }, []);
+    }, [setIsEditing]);
   
     const handleAdd = () => {
       setIsEditing(true);

@@ -13,7 +13,9 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
 
   const handleShow = () => {
     setIsShow((prev) => !prev);
-    (isPost && setIsPostGenreEmpty !== undefined) && setIsPostGenreEmpty(false);
+    if (isPost && setIsPostGenreEmpty !== undefined) {
+      setIsPostGenreEmpty(false);
+    }
   }
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
     if (isPost) {
       setGenre("ジャンル選択");
     }
-  }, [genres]);
+  }, [genres, isPost, setGenre]);
 
   const handleGenre = useCallback((id: number, name: string) => {
     setGenreId(id);
@@ -35,7 +37,7 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
       setPostGenre !== undefined && setPostGenre(name);
       setIsEditing(true);
     }
-  }, []);
+  }, [isPost, handleReset, setGenre, setGenreId, setIsShow, setIsEditing, setPostGenre ]);
 
   const handleSearchGenre = useCallback((id: number, name: string) => {
     handleGenre(id, name);
@@ -49,11 +51,11 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
           { params: { genre } }
         )
         .then((res) => {
-
+          console.log(res.data);
         })
         .catch((err) => console.error(err));
     }
-  }, [genre]);
+  }, [genre, handleGenre, genres, setIsArticleList, setIsArticleGenre]);
 
   return (
     <>

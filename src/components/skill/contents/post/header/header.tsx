@@ -1,7 +1,7 @@
 'use client';
 
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import styles from "./header.module.css";
 
@@ -39,7 +39,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
 
   useEffect(() => {
     setPostId(0);
-  }, []);
+  }, [setPostId]);
 
   const errorCheck = useCallback(() => {
     let haserror = false;
@@ -68,7 +68,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     setSubposterrors(errors);
 
     return haserror;
-  }, [postGenre, title, description, subposts]);
+  }, [postGenre, title, description, subposts, isTitleSize, isDescriptionSize, fileSizeOver, setIsDescriptionEmpty, setIsTitleEmpty, setIsPostGenreEmpty, setSubposterrors]);
 
   const save = async (imgPath: string | null) => {
     await saveSubpostsImg(subposts);
@@ -164,12 +164,16 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
   const handlePreview = useCallback(async () => {
     if (errorCheck()) return;
 
-    postId !== 0 ? handleUpdate() : handleSave();
+    if (postId !== 0) {
+      handleUpdate();
+    } else {
+      handleSave();
+    }
 
     handleReset();
     setIsArticleList(false);
     setIsPreview(true);
-  }, [postId, postGenre, title, description, subposts]);
+  }, [postId, postGenre, title, description, subposts, errorCheck, handleUpdate, handleSave, handleReset, setIsArticleList, setIsPreview]);
 
   return (
     <div className={styles.container}>
