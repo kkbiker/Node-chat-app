@@ -14,7 +14,7 @@ import { SkillProvider, useSkillContext } from "@/context/Skill/SkillContext";
 import styles from "./skill.module.css";
 
 function SkillContext() {
-  const { isArticleList, isArticleGenre, isPost, isPostList, isAdmin, isArticleDetail, isArticleEdit, isPreview } = useSkillContext();
+  const { isArticleList, isArticleGenre, isPost, isPostList, isAdmin, isArticleDetail, isPreview } = useSkillContext();
 
   return (
     <>

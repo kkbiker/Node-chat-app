@@ -100,7 +100,7 @@ export const useAuth = () => {
           setRegistErr(false);
         }, 3000);
       });
-  }, [isMaster, companyName, isCompanyNameSize, companyId, name, isNameSize, email, password, isPasswordSize]);
+  }, [isMaster, companyName, isCompanyNameSize, companyId, name, isNameSize, email, password, isPasswordSize, handleSkill]);
 
   const handleLogin = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,7 +118,7 @@ export const useAuth = () => {
           setLoginErr(false);
         }, 3000);
       });
-  }, [email, password]);
+  }, [email, password, handleSkill]);
 
   return {
     isMaster,

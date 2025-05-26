@@ -34,10 +34,12 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
     if (!isPost) {
       handleReset();
     } else {
-      setPostGenre !== undefined && setPostGenre(name);
+      if (setPostGenre !== undefined) {
+        setPostGenre(name);
+      }
       setIsEditing(true);
     }
-  }, [isPost, handleReset, setGenre, setGenreId, setIsShow, setIsEditing, setPostGenre ]);
+  }, [isPost, handleReset, setGenre, setGenreId, setIsShow, setIsEditing, setPostGenre]);
 
   const handleSearchGenre = useCallback((id: number, name: string) => {
     handleGenre(id, name);

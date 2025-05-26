@@ -80,7 +80,7 @@ export const RegisterProvider = ({ children }: { children: React.ReactNode }) =>
           setMailsendErr(false);
         }, 3000);
       });
-  }, [email]);
+  }, [email, setIsEmailEmpty]);
 
   const handleInputCode = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

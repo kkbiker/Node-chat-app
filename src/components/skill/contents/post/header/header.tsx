@@ -124,7 +124,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     } else {
       await save(null);
     }
-  }, [postGenre, title, description, titleImg, subposts]);
+  }, [postGenre, title, description, titleImg, subposts, errorCheck, save]);
 
 
   const update = async (imgPath: string | null) => {
@@ -159,7 +159,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     } else {
       await update(null);
     }
-  }, [postId, postGenre, title, description, titleImg, subposts]);
+  }, [postId, postGenre, title, description, titleImg, subposts, errorCheck, update]);
 
   const handlePreview = useCallback(async () => {
     if (errorCheck()) return;
@@ -173,7 +173,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     handleReset();
     setIsArticleList(false);
     setIsPreview(true);
-  }, [postId, postGenre, title, description, subposts, errorCheck, handleUpdate, handleSave, handleReset, setIsArticleList, setIsPreview]);
+  }, [postId, errorCheck, handleUpdate, handleSave, handleReset, setIsArticleList, setIsPreview]);
 
   return (
     <div className={styles.container}>
