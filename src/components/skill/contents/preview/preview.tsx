@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import { Header } from "./header/header";
 import styles from "./preview.module.css";
+import Image from "next/image";
 
 export function Preview() {
   const { articleId } = useSkillContext();
@@ -58,7 +59,7 @@ export function Preview() {
           </div>
         </div>
         <p>{article?.description}</p>
-        {article?.aImgPath && <div className={styles.ImgBx}><img src={`${process.env.NEXT_PUBLIC_JAVA_API_URL}/img/${article?.aImgPath}`} /></div>}
+        {article?.aImgPath && <div className={styles.ImgBx}><Image src={`${process.env.NEXT_PUBLIC_JAVA_API_URL}/img/${article?.aImgPath}`} alt="写真" /></div>}
         {Array.isArray(article?.subArticles) &&
           article.subArticles.map((subarticle, index) => (
             <div key={index} className={styles.subarticle}>
@@ -66,7 +67,7 @@ export function Preview() {
               <p>{subarticle.content}</p>
               {subarticle.saImgPath && (
                 <div className={styles.ImgBx}>
-                  <img src={`${process.env.NEXT_PUBLIC_JAVA_API_URL}/img/${subarticle.saImgPath}`} />
+                  <Image src={`${process.env.NEXT_PUBLIC_JAVA_API_URL}/img/${subarticle.saImgPath}`} alt="写真" />
                 </div>
               )}
             </div>

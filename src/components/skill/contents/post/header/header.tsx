@@ -70,6 +70,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     return haserror;
   }, [postGenre, title, description, subposts, isTitleSize, isDescriptionSize, fileSizeOver, setIsDescriptionEmpty, setIsTitleEmpty, setIsPostGenreEmpty, setSubposterrors]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const save = async (imgPath: string | null) => {
     await saveSubpostsImg(subposts);
 
@@ -124,9 +125,10 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     } else {
       await save(null);
     }
-  }, [postGenre, title, description, titleImg, subposts, errorCheck, save]);
+  }, [titleImg, errorCheck, save]);
 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const update = async (imgPath: string | null) => {
     await saveSubpostsImg(subposts);
 
@@ -159,7 +161,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     } else {
       await update(null);
     }
-  }, [postId, postGenre, title, description, titleImg, subposts, errorCheck, update]);
+  }, [titleImg, errorCheck, update]);
 
   const handlePreview = useCallback(async () => {
     if (errorCheck()) return;
