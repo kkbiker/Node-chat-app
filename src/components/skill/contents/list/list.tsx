@@ -4,29 +4,28 @@ import Image from "next/image";
 import styles from "./list.module.css";
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import axios from "axios";
-import { useState } from "react";
 
 export function List() {
 
   const {genres, setIsArticleList, setIsArticleGenre, setGenre, handleReset} = useSkillContext();
 
-  type ArticleList = {
-    genreId: number,
-    genreName: string,
-    subgenreId: number,
-    subgenreName: string,
-    articles: Article[]
-  }
+  // type ArticleList = {
+  //   genreId: number,
+  //   genreName: string,
+  //   subgenreId: number,
+  //   subgenreName: string,
+  //   articles: Article[]
+  // }
 
-  type Article = {
-    id: number,
-    title: string,
-    description: string,
-    userName: string,
-    createAt: string,
-    favoriteCount: string,
-    isPublic: boolean
-  }
+  // type Article = {
+  //   id: number,
+  //   title: string,
+  //   description: string,
+  //   userName: string,
+  //   createAt: string,
+  //   favoriteCount: string,
+  //   isPublic: boolean
+  // }
 
   // const [articles, setArticles] = useState<ArticleList[]>([]);
 

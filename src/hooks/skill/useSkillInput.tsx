@@ -18,106 +18,106 @@ export const useSkillInput = () => {
   const [fileSizeOver, setFileSizeOver] = useState(false);
 
   const handleTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-      setIsEditing(true);
-      const value = e.target.value;
-      setIsTitleEmpty(false);
-      setIsTitleSize(value.length > 50);
-      setTitle(value);
-    }, []);
-  
-    const handleDescription = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setIsEditing(true);
-      const value = e.target.value;
-      setIsDescriptionEmpty(false);
-      setIsDescriptionSize(value.length > 1000);
-      setDescription(value);
-    }, []);
-  
-    const handleFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-      setIsEditing(true);
-      const value = e.target.files?.[0];
-      if (!value) return;
-      setFileSizeOver(value.size > 5 * 1024 * 1024);
-      setTitleImg(value);
-    }, []);
-  
-    const handleFileDelete = useCallback(() => {
-      setIsEditing(true);
-      setTitleImg(null);
-      setFileSizeOver(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
+    setIsEditing(true);
+    const value = e.target.value;
+    setIsTitleEmpty(false);
+    setIsTitleSize(value.length > 50);
+    setTitle(value);
+  }, [setIsEditing]);
+
+  const handleDescription = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setIsEditing(true);
+    const value = e.target.value;
+    setIsDescriptionEmpty(false);
+    setIsDescriptionSize(value.length > 1000);
+    setDescription(value);
+  }, [setIsEditing]);
+
+  const handleFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsEditing(true);
+    const value = e.target.files?.[0];
+    if (!value) return;
+    setFileSizeOver(value.size > 5 * 1024 * 1024);
+    setTitleImg(value);
+  }, [setIsEditing]);
+
+  const handleFileDelete = useCallback(() => {
+    setIsEditing(true);
+    setTitleImg(null);
+    setFileSizeOver(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }, [setIsEditing]);
+
+  type SubpostType = {
+    subTitle: string,
+    content: string,
+    imgPath: string,
+    file: File | null
+  }
+  type SubpostError = {
+    isSubTitleEmpty: boolean,
+    isSubTitleSize: boolean,
+    isContentEmpty: boolean,
+    isContentSize: boolean
+  }
+  const [subposts, setSubposts] = useState<SubpostType[]>([]);
+  const [subpostserrors, setSubposterrors] = useState<SubpostError[]>([]);
+
+  const handleSubTitle = useCallback((index: number, value: string) => {
+    setIsEditing(true);
+    setSubposts((prev) => {
+      const update = [...prev];
+      if (update[index]) update[index].subTitle = value;
+      return update;
+    });
+  }, [setIsEditing]);
+
+  const handleContent = useCallback((index: number, value: string) => {
+    setIsEditing(true);
+    setSubposts((prev) => {
+      const update = [...prev];
+      if (update[index]) update[index].content = value;
+      return update;
+    });
+  }, [setIsEditing]);
+
+  const handleSubImg = useCallback((index: number, value: File | null) => {
+    setIsEditing(true);
+    setSubposts((prev) => {
+      const update = [...prev];
+      if (update[index]) update[index].file = value;
+      return update;
+    })
+  }, [setIsEditing]);
+
+  const handleDeleteSubImg = useCallback((index: number) => {
+    setIsEditing(true);
+    setSubposts(prev => {
+      const updated = [...prev];
+      if (updated[index]) {
+        updated[index].file = null;
       }
-    }, []);
-  
-    type SubpostType = {
-      subTitle: string,
-      content: string,
-      imgPath: string,
-      file: File | null
+      return updated;
+    });
+
+    const inputRef = subFileInputRefs.current[index];
+    if (inputRef) {
+      inputRef.value = "";
     }
-    type SubpostError = {
-      isSubTitleEmpty: boolean,
-      isSubTitleSize: boolean,
-      isContentEmpty: boolean,
-      isContentSize: boolean
-    }
-    const [subposts, setSubposts] = useState<SubpostType[]>([]);
-    const [subpostserrors, setSubposterrors] = useState<SubpostError[]>([]);
-  
-    const handleSubTitle = useCallback((index: number, value: string) => {
-      setIsEditing(true);
-      setSubposts((prev) => {
-        const update = [...prev];
-        if (update[index]) update[index].subTitle = value;
-        return update;
-      });
-    }, [setIsEditing]);
-  
-    const handleContent = useCallback((index: number, value: string) => {
-      setIsEditing(true);
-      setSubposts((prev) => {
-        const update = [...prev];
-        if (update[index]) update[index].content = value;
-        return update;
-      });
-    }, [setIsEditing]);
-  
-    const handleSubImg = useCallback((index: number, value: File | null) => {
-      setIsEditing(true);
-      setSubposts((prev) => {
-        const update = [...prev];
-        if (update[index]) update[index].file = value;
-        return update;
-      })
-    }, [setIsEditing]);
-  
-    const handleDeleteSubImg = useCallback((index: number) => {
-      setIsEditing(true);
-      setSubposts(prev => {
-        const updated = [...prev];
-        if (updated[index]) {
-          updated[index].file = null;
-        }
-        return updated;
-      });
-  
-      const inputRef = subFileInputRefs.current[index];
-      if (inputRef) {
-        inputRef.value = "";
-      }
-    }, [setIsEditing]);
-  
-    const handleAdd = () => {
-      setIsEditing(true);
-      setSubposts((prev) => [...prev, { subTitle: "", content: "", imgPath: "", file: null }]);
-      setSubposterrors((prev) => [...prev, { isSubTitleEmpty: false, isSubTitleSize: false, isContentEmpty: false, isContentSize: false }])
-    }
-  
-    const handlereduse = (index: number) => {
-      setIsEditing(true);
-      setSubposts((prev) => prev.filter((_, i) => i !== index));
-    }
+  }, [setIsEditing]);
+
+  const handleAdd = () => {
+    setIsEditing(true);
+    setSubposts((prev) => [...prev, { subTitle: "", content: "", imgPath: "", file: null }]);
+    setSubposterrors((prev) => [...prev, { isSubTitleEmpty: false, isSubTitleSize: false, isContentEmpty: false, isContentSize: false }])
+  }
+
+  const handlereduse = (index: number) => {
+    setIsEditing(true);
+    setSubposts((prev) => prev.filter((_, i) => i !== index));
+  }
 
   return {
     fileInputRef,
