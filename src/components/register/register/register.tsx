@@ -7,7 +7,7 @@ import styles from "./register.module.css";
 import { useAuth } from "@/hooks/auth/useAuth";
 
 export function Register() {
-  const { companyName, isCompanyNameEmpty, isCompanyNameSize, companyId, isCompanyIdEmpty, name, isNameEmpty, isNameSize, email, password, isPasswordEmpty, isPasswordSize, registErr, isMaster, handleName, handlePassword, handleCompanyName, handleCompanyId, handleSubmit } = useRegisterContext();
+  const { companyName, isCompanyNameEmpty, isCompanyNameSize, companyId, isCompanyIdEmpty, name, isNameEmpty, isNameSize, email, password, isPasswordEmpty, isPasswordSize, isPasswordPattern, registErr, isMaster, handleName, handlePassword, handleCompanyName, handleCompanyId, handleSubmit } = useRegisterContext();
 
   const {showPassword, handleShow} = useAuth();
 
@@ -46,6 +46,7 @@ export function Register() {
           <h6>パスワード</h6>
           {isPasswordEmpty && <p className={styles.error}>パスワードは必須項目です。</p>}
           {isPasswordSize && <p className={styles.error}>パスワードは50文字以内で入力してください。</p>}
+          {isPasswordPattern && <p className={styles.error}>パスワードには大小半角英数字をそれぞれ1文字以上含めてください。</p>}
           <div>
             {showPassword ?
               <input type="text" value={password} placeholder="パスワードを入力してください。" onChange={(e) => handlePassword(e)} />

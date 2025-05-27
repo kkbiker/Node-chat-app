@@ -17,6 +17,7 @@ type RegisterContext = {
   password: string,
   isPasswordEmpty: boolean,
   isPasswordSize: boolean,
+  isPasswordPattern: boolean,
   registErr: boolean,
   code: number,
   inputCode: string,
@@ -44,7 +45,7 @@ const RegisterContext = createContext<RegisterContext | null>(null);
 
 export const RegisterProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const { isMaster, setIsMaster, companyName, isCompanyNameEmpty, isCompanyNameSize, companyId, isCompanyIdEmpty, name, isNameEmpty, isNameSize, email, isEmailEmpty, password, isPasswordEmpty, isPasswordSize, registErr, handleCompanyName, handleCompanyId, handleName, handleEmail, setIsEmailEmpty, handlePassword, handleSubmit } = useAuth();
+  const { isMaster, setIsMaster, companyName, isCompanyNameEmpty, isCompanyNameSize, companyId, isCompanyIdEmpty, name, isNameEmpty, isNameSize, email, isEmailEmpty, password, isPasswordEmpty, isPasswordSize, isPasswordPattern, registErr, handleCompanyName, handleCompanyId, handleName, handleEmail, setIsEmailEmpty, handlePassword, handleSubmit } = useAuth();
 
   const [code, setCode] = useState(0);
   const [inputCode, setInputCode] = useState("");
@@ -127,6 +128,7 @@ export const RegisterProvider = ({ children }: { children: React.ReactNode }) =>
       password,
       isPasswordEmpty,
       isPasswordSize,
+      isPasswordPattern,
       registErr,
       code,
       inputCode,

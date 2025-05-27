@@ -21,6 +21,7 @@ export const useAuth = () => {
   const [password, setPassword] = useState("");
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const [isPasswordSize, setIsPasswordSize] = useState(false);
+  const [isPasswordPattern, setIsPasswordPattern] = useState(false);
   const [registErr, setRegistErr] = useState(false);
   const [loginErr, setLoginErr] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -56,9 +57,10 @@ export const useAuth = () => {
   }, []);
 
   const handlePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setIsPasswordEmpty(!(value.trim().length > 0));
     setIsPasswordSize(value.length > 50);
+    setIsPasswordPattern(false);
     setPassword(e.target.value.trim());
   }, []);
 
@@ -83,6 +85,8 @@ export const useAuth = () => {
       setIsNameEmpty(name.trim() === "");
       setIsEmailEmpty(email.trim() === "");
       setIsPasswordEmpty(password.trim() === "");
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]+$/;
+      setIsPasswordPattern(regex.test(password));
       haserror = true;
     }
 
@@ -136,6 +140,7 @@ export const useAuth = () => {
     password,
     isPasswordEmpty,
     isPasswordSize,
+    isPasswordPattern,
     registErr,
     loginErr,
     showPassword,
