@@ -34,7 +34,7 @@ export function PostList() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/findArticlesByUserId`, { params: { userId } })
+      .get(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/findArticlesByUserId`, { params: { userId } })
       .then((res) => {
         console.log(res.data);
         setArticles(res.data);

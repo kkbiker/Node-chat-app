@@ -35,7 +35,7 @@ type Props = {
 }
 
 export function Header({ postGenre, title, titleImg, isTitleSize, description, isDescriptionSize, subposts, setSubposterrors, setIsPostGenreEmpty, setIsTitleEmpty, setIsDescriptionEmpty, fileSizeOver }: Props) {
-  const { userId, genreId, postId, isEditing, setPostId, setArticleId, setIsArticleList, setIsPreview, setIsEditing, handleReset } = useSkillContext();
+  const { userId, genreId, postId, isEditing, setPostId, setIsArticleList, setIsPreview, setIsEditing, handleReset } = useSkillContext();
 
   useEffect(() => {
     setPostId(0);
@@ -75,10 +75,9 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     await saveSubpostsImg(subposts);
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/save`, { userId, genreId, postGenre, title, description, imgPath, subposts })
+      .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/save`, { userId, genreId, postGenre, title, description, imgPath, subposts })
       .then((res) => {
-        setPostId(res.data);
-        setArticleId(res.data);
+        setPostId(res.data.parentId);
         setIsEditing(false);
       })
       .catch((err) => console.error(err));
@@ -92,7 +91,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
         formData.append("subpostId", String(index));
         try {
           const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/saveSubImg`,
+            `${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/saveSubImg`,
             formData,
             { headers: { "Content-Type": "multipart/form-data" } }
           );
@@ -114,7 +113,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
       formData.append("titleImg", titleImg);
       try {
         const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/saveImg`,
+          `${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/saveImg`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -133,10 +132,10 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     await saveSubpostsImg(subposts);
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/save`, { postId, userId, genreId, postGenre, title, description, imgPath, subposts })
+      .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/save`, { postId, userId, genreId, postGenre, title, description, imgPath, subposts })
       .then((res) => {
-        setPostId(res.data);
-        setArticleId(res.data);
+        console.log(res.data.parentId);
+        setPostId(res.data.parentId);
         setIsEditing(false);
       })
       .catch((err) => console.error(err));
@@ -167,9 +166,9 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     if (errorCheck()) return;
 
     if (postId !== 0) {
-      handleUpdate();
+      await handleUpdate();
     } else {
-      handleSave();
+      await handleSave();
     }
 
     handleReset();

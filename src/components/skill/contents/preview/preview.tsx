@@ -9,7 +9,7 @@ import styles from "./preview.module.css";
 import Image from "next/image";
 
 export function Preview() {
-  const { articleId } = useSkillContext();
+  const { postId } = useSkillContext();
 
   type Article = {
     subgenreId: number
@@ -35,13 +35,15 @@ export function Preview() {
   const [article, setArticle] = useState<Article>();
 
   useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/findArticleByid`, { params: { articleId } })
-      .then((res) => {
-        setArticle(res.data);
-      })
-      .catch((err) => console.error(err));
-  }, [articleId]);
+    if (postId !== 0) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/findArticleByid`, { params: { postId } })
+        .then((res) => {
+          setArticle(res.data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [postId]);
 
   return (
     <>
