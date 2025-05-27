@@ -8,7 +8,7 @@
 
 .content {
     display: flex;
-    align-items: flex-end;
+    flex-wrap: wrap;
     gap: 1.6rem;
     padding: .8rem;
     border-radius: 2rem;
@@ -22,6 +22,19 @@
 
 .content:hover .imgBx {
     border-color: var(--background);
+}
+
+.leftBx {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.6rem;
+}
+
+.rightBx {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    width: 32rem;
 }
 
 .imgBx {
@@ -42,11 +55,6 @@
     flex-direction: column;
     gap: .4rem;
     width: 24rem;
-}
-
-.contentBx h4 {
-    max-height: 7rem;
-    overflow: hidden;
 }
 
 .contentBx div {

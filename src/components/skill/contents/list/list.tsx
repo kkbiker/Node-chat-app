@@ -3,26 +3,11 @@
 import styles from "./list.module.css";
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export function List() {
 
-  const { companyId, setArticleId, setIsArticleList, setIsArticleDetail, handleReset } = useSkillContext();
-
-  type Article = {
-    subgenre_id: number
-    subgenre_name: string,
-    id: number,
-    title: string,
-    description: string,
-    aImgPath: string,
-    is_edit: boolean,
-    is_public: boolean,
-    create_at: string,
-    favorite_count: number
-  }
-
-  const [articles, setArticles] = useState<Article[]>([]);
+  const { companyId, articles, setArticleId, setIsArticleList, setIsArticleDetail, handleReset, setArticles } = useSkillContext();
 
   useEffect(() => {
     axios
@@ -31,7 +16,7 @@ export function List() {
         setArticles(res.data);
       })
       .catch((err) => console.error(err));
-  }, [companyId]);
+  }, [companyId, setArticles]);
 
   return (
     <>

@@ -44,6 +44,11 @@
     width: 24rem;
 }
 
+.contentBx h4 {
+    max-height: 7rem;
+    overflow: hidden;
+}
+
 .contentBx div {
     display: flex;
     justify-content: space-between;

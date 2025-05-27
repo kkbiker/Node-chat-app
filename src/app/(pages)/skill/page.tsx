@@ -19,7 +19,7 @@ function SkillContext() {
   return (
     <>
       <Header />
-      <Search />
+      {!isArticleDetail && <Search />}
       {isArticleList && <List />}
       {isArticleGenre && <ArticleGenre />}
       {isPost && <Post />}
