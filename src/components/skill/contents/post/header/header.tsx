@@ -35,11 +35,16 @@ type Props = {
 }
 
 export function Header({ postGenre, title, titleImg, isTitleSize, description, isDescriptionSize, subposts, setSubposterrors, setIsPostGenreEmpty, setIsTitleEmpty, setIsDescriptionEmpty, fileSizeOver }: Props) {
-  const { userId, genreId, postId, isEditing, setPostId, setIsArticleList, setIsPreview, setIsEditing, handleReset } = useSkillContext();
+  const { isPost, isArticleEdit, userId, genreId, postId, articleId, isEditing, setPostId, setIsArticleList, setIsPreview, setIsEditing, handleReset } = useSkillContext();
 
   useEffect(() => {
-    setPostId(0);
-  }, [setPostId]);
+    if (isPost) {
+      setPostId(0);
+    }
+    if (isArticleEdit) {
+      setPostId(articleId);
+    }
+  }, [isPost, isArticleEdit, articleId, setPostId]);
 
   const errorCheck = useCallback(() => {
     let haserror = false;
@@ -85,7 +90,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
 
   const saveSubpostsImg = async (subposts: SubpostType[]) => {
     const uploadPromises = subposts.map(async (subpost, index) => {
-      if (subpost.file !== null) {
+      if (subpost.file) {
         const formData = new FormData();
         formData.append("subTitleImg", subpost.file as File);
         formData.append("subpostId", String(index));
@@ -165,10 +170,12 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
   const handlePreview = useCallback(async () => {
     if (errorCheck()) return;
 
-    if (postId !== 0) {
-      await handleUpdate();
-    } else {
-      await handleSave();
+    if (isEditing) {
+      if (postId !== 0) {
+        await handleUpdate();
+      } else {
+        await handleSave();
+      }
     }
 
     handleReset();

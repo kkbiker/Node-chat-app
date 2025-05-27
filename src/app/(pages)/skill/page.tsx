@@ -8,13 +8,13 @@ import { Post } from "@/component/skill/contents/post/post";
 import { PostList } from "@/component/skill/contents/postList/postList";
 import { Admin } from "@/component/skill/contents/admin/admin";
 import { ArticleDetail } from "@/component/skill/contents/articleDetail/articleDetail";
-// import { ArticleEdit } from "@/component/skill/contents/articleEdit/articleEdit";
+import { ArticleEdit } from "@/component/skill/contents/articleEdit/articleEdit";
 import { Preview } from "@/component/skill/contents/preview/preview";
 import { SkillProvider, useSkillContext } from "@/context/Skill/SkillContext";
 import styles from "./skill.module.css";
 
 function SkillContext() {
-  const { isArticleList, isArticleGenre, isPost, isPostList, isAdmin, isArticleDetail, isPreview } = useSkillContext();
+  const { isArticleList, isArticleGenre, isPost, isPostList, isAdmin, isArticleDetail, isArticleEdit, isPreview } = useSkillContext();
 
   return (
     <>
@@ -26,7 +26,7 @@ function SkillContext() {
       {isPostList && <PostList />}
       {isAdmin && <Admin />}
       {isArticleDetail && <ArticleDetail />}
-      {/* {isArticleEdit && <ArticleEdit />} */}
+      {isArticleEdit && <ArticleEdit />}
       {isPreview && <Preview />}
     </>
   );

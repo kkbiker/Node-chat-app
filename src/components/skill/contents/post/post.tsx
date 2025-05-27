@@ -115,32 +115,6 @@ export function Post() {
           <button type="button" onClick={handleAdd}>＋サブタイトルを追加する</button>
         </div>
       </section>
-      {/* <Input
-        fileInputRef={fileInputRef}
-        subFileInputRefs={subFileInputRefs}
-        setPostGenre={setPostGenre}
-        isPostGenreEmpty={isPostGenreEmpty}
-        setIsPostGenreEmpty={setIsPostGenreEmpty}
-        title={title}
-        isTitleEmpty={isTitleEmpty}
-        isTitleSize={isTitleSize}
-        description={description}
-        isDescriptionEmpty={isDescriptionEmpty}
-        isDescriptionSize={isDescriptionSize}
-        fileSizeOver={fileSizeOver}
-        handleTitle={handleTitle}
-        handleDescription={handleDescription}
-        handleFile={handleFile}
-        handleFileDelete={handleFileDelete}
-        subposts={subposts}
-        subpostserrors={subpostserrors}
-        handleSubTitle={handleSubTitle}
-        handleContent={handleContent}
-        handleSubImg={handleSubImg}
-        handleDeleteSubImg={handleDeleteSubImg}
-        handleAdd={handleAdd}
-        handlereduse={handlereduse}
-      /> */}
     </>
   );
 }
