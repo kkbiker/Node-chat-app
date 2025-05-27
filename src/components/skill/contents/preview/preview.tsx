@@ -2,11 +2,12 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import { Header } from "./header/header";
+import { Select } from "./select/select";
 import styles from "./preview.module.css";
-import Image from "next/image";
 
 export function Preview() {
   const { postId } = useSkillContext();
@@ -45,9 +46,15 @@ export function Preview() {
     }
   }, [postId]);
 
+  const [isShow, setIsShow] = useState(false);
+
+  const handleShow = () => {
+    setIsShow((prev) => !prev);
+  }
+
   return (
     <>
-      <Header />
+      <Header articleId={postId} handleShow={handleShow} />
       <section className={styles.container}>
         <div className={styles.article}>
           <div className={styles.title}>
@@ -75,6 +82,7 @@ export function Preview() {
             </div>
           ))}
       </section>
+      {isShow && <Select articleId={postId} handleShow={handleShow} />}
     </>
   );
 }

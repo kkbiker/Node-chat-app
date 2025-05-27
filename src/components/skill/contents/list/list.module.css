@@ -19,8 +19,8 @@
 
 .contents {
     display: flex;
-    gap: 4.8rem;
     flex-wrap: wrap;
+    gap: 4.8rem;
     max-width: 83.2rem;
 }
 
