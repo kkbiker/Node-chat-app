@@ -15,6 +15,19 @@ type Subgenre = {
   name: string
 }
 
+type Article = {
+  subgenre_id: number
+  subgenre_name: string,
+  id: number,
+  title: string,
+  description: string,
+  aImgPath: string,
+  is_edit: boolean,
+  is_public: boolean,
+  create_at: string,
+  favorite_count: number
+}
+
 type SkillContext = {
   userId: number,
   companyId: string,
@@ -32,6 +45,7 @@ type SkillContext = {
   isEditing: boolean,
   genres: Genre[],
   genre: string,
+  articles: Article[],
   setUserId: (value: number) => void,
   setGenreId: (value: number) => void,
   setPostId: (value: number) => void,
@@ -45,6 +59,7 @@ type SkillContext = {
   setIsArticleGenre: (value: boolean) => void,
   setIsPreview: (value: boolean) => void,
   setGenre: (value: string) => void,
+  setArticles: (value: Article[]) => void,
   setIsEditing: (value: boolean) => void,
   handleReset: () => void,
 }
@@ -69,6 +84,7 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [genres, setGenres] = useState<Genre[]>([]);
   const [genre, setGenre] = useState("");
+  const [articles, setArticles] = useState<Article[]>([]);
 
   const handleReset = () => {
     setIsAdmin(false);
@@ -114,6 +130,7 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
       isPreview,
       genres,
       genre,
+      articles,
       isEditing,
       setUserId,
       setGenreId,
@@ -128,6 +145,7 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
       setIsArticleGenre,
       setIsPreview,
       setGenre,
+      setArticles,
       handleReset,
       setIsEditing
     }}>

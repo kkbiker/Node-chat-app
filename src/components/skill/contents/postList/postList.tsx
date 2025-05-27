@@ -2,27 +2,12 @@
 
 import axios from "axios";
 import { useSkillContext } from "@/context/Skill/SkillContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import styles from "./postList.module.css";
 
 export function PostList() {
-  const { userId, setArticleId, setIsArticleList, setIsArticleEdit, handleReset } = useSkillContext();
-
-  type Article = {
-    subgenre_id: number
-    subgenre_name: string,
-    id: number,
-    title: string,
-    description: string,
-    aImgPath: string,
-    is_edit: boolean,
-    is_public: boolean,
-    create_at: string,
-    favorite_count: number
-  }
-
-  const [articles, setArticles] = useState<Article[]>([]);
+  const { userId, articles, setArticleId, setIsArticleList, setIsArticleEdit, handleReset, setArticles } = useSkillContext();
 
   useEffect(() => {
     axios
@@ -31,7 +16,8 @@ export function PostList() {
         setArticles(res.data);
       })
       .catch((err) => console.error(err));
-  }, [userId]);
+  }, [userId, setArticles]);
+
   return (
     <>
       <section className={styles.container}>

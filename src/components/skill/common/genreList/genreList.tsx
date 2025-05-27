@@ -7,7 +7,7 @@ import { useSkillContext } from "@/context/Skill/SkillContext";
 import styles from "./genreList.module.css";
 
 export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?: (value: string) => void, setIsPostGenreEmpty?: (value: boolean) => void }) {
-  const { isPost, isArticleEdit, genres, genre, setGenreId, setIsArticleList, setIsArticleGenre, setGenre, setIsEditing, handleReset } = useSkillContext();
+  const { companyId, isPost, isArticleEdit, genres, genre, setGenreId, setIsArticleList, setIsArticleGenre, setGenre, setArticles, setIsEditing, handleReset } = useSkillContext();
 
   const [isShow, setIsShow] = useState(false);
 
@@ -41,8 +41,9 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
     }
   }, [isPost, isArticleEdit, handleReset, setGenre, setGenreId, setIsShow, setIsEditing, setPostGenre]);
 
-  const handleSearchGenre = useCallback((id: number, name: string) => {
-    handleGenre(id, name);
+  const handleSearchGenre = useCallback(async (id: number, name: string) => {
+    setGenreId(id);
+    setGenre(name);
 
     if (name !== genres[0].name) {
       setIsArticleList(false);
@@ -50,14 +51,19 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
 
       axios
         .get(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/findByGenre`,
-          { params: { genre } }
+          { params: { id, companyId } }
         )
         .then((res) => {
-          console.log(res.data);
+          setArticles(res.data);
         })
         .catch((err) => console.error(err));
+    } else {
+      setIsArticleList(true);
+      setIsArticleGenre(false);
     }
-  }, [genre, handleGenre, genres, setIsArticleList, setIsArticleGenre]);
+
+    setIsShow(false);
+  }, [companyId, genres, setGenreId, setGenre, setIsArticleList, setIsArticleGenre, setArticles]);
 
   return (
     <>
