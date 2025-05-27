@@ -17,6 +17,7 @@ type Subgenre = {
 
 type SkillContext = {
   userId: number,
+  companyId: string,
   genreId: number,
   postId: number,
   articleId: number,
@@ -52,6 +53,7 @@ const SkillContext = createContext<SkillContext | null>(null);
 
 export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState<number>(0)
+  const [companyId, setCompanyId] = useState("");
   const [genreId, setGenreId] = useState<number>(0);
   const [postId, setPostId] = useState<number>(0);
   const [articleId, setArticleId] = useState<number>(0);
@@ -85,6 +87,7 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
     const user = JSON.parse(userData);
     setUserId(user.id);
     setIsAdmin(user.AdminFlag);
+    setCompanyId(user.companyId);
 
     axios
       .get(`${process.env.NEXT_PUBLIC_NODE_API_URL}/genre/showAll`)
@@ -97,6 +100,7 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <SkillContext.Provider value={{
       userId,
+      companyId,
       genreId,
       postId,
       articleId,

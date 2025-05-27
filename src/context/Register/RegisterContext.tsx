@@ -68,7 +68,6 @@ export const RegisterProvider = ({ children }: { children: React.ReactNode }) =>
     axios
       .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/mailsend`, { email })
       .then((res) => {
-        console.log(res.data.code);
         setCode(res.data.code);
         setIsMailsend(false);
         setIsCodeCheck(true);

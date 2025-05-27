@@ -139,7 +139,6 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     axios
       .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/save`, { postId, userId, genreId, postGenre, title, description, imgPath, subposts })
       .then((res) => {
-        console.log(res.data.parentId);
         setPostId(res.data.parentId);
         setIsEditing(false);
       })
