@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 
 import { useSkillContext } from "@/context/Skill/SkillContext";
+import { Comment } from "./comment/comment";
 import styles from "./articleDetail.module.css";
 
 export function ArticleDetail() {
@@ -91,6 +92,7 @@ export function ArticleDetail() {
             </div>
           ))}
       </section>
+      <Comment />
     </>
   );
 }
