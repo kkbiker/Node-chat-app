@@ -66,25 +66,23 @@ export function GenreList({ setPostGenre, setIsPostGenreEmpty }: { setPostGenre?
   }, [companyId, genres, setGenreId, setGenre, setIsArticleList, setIsArticleGenre, setArticles]);
 
   return (
-    <>
-      <div className={styles.genres}>
-        <button onClick={handleShow} className={`${isShow && styles.show}`}>{genre}</button>
-        {isShow &&
-          <div>
-            {genres.map(genre => (
-              <div key={genre.id}>
-                <h4 onClick={() => `${!isPost && handleSearchGenre(genre.id, genre.name)}`} className={`${!isPost && styles.nopost}`}>◉{genre.name}</h4>
-                {genre.subgenres?.length > 1 ? genre.subgenres.map(subgenre => (
-                  <h5 key={subgenre.id} onClick={() => `${isPost || isArticleEdit ? handleGenre(subgenre.id, subgenre.name) : handleSearchGenre(subgenre.id, subgenre.name)}`}>{subgenre.name}</h5>
-                ))
-                  :
-                  null
-                }
-              </div>
-            ))}
-          </div>
-        }
-      </div>
-    </>
+    <div className={styles.genres}>
+      <button onClick={handleShow} className={`${isShow && styles.show}`}>{genre}</button>
+      {isShow &&
+        <div>
+          {genres.map(genre => (
+            <div key={genre.id}>
+              <h4 onClick={() => `${!isPost && handleSearchGenre(genre.id, genre.name)}`} className={`${!isPost && styles.nopost}`}>◉{genre.name}</h4>
+              {genre.subgenres?.length > 1 ? genre.subgenres.map(subgenre => (
+                <h5 key={subgenre.id} onClick={() => `${isPost || isArticleEdit ? handleGenre(subgenre.id, subgenre.name) : handleSearchGenre(subgenre.id, subgenre.name)}`}>{subgenre.name}</h5>
+              ))
+                :
+                null
+              }
+            </div>
+          ))}
+        </div>
+      }
+    </div>
   );
 }

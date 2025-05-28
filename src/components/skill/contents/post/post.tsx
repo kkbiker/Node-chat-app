@@ -4,7 +4,9 @@ import { Header } from "./header/header";
 import { Subpost } from "./subpost/subpost";
 import { useSkillInput } from "@/hooks/skill/useSkillInput";
 import { GenreList } from "../../common/genreList/genreList";
+import { Alert } from "../../common/alert/alert";
 import styles from "./post.module.css";
+import { useSkillContext } from "@/context/Skill/SkillContext";
 
 export function Post() {
   const {
@@ -36,8 +38,10 @@ export function Post() {
     handleSubImg,
     handleDeleteSubImg,
     handleAdd,
-    handlereduse
+    handlereduse,
   } = useSkillInput();
+
+  const {showAlert} = useSkillContext();
 
   return (
     <>
@@ -115,6 +119,7 @@ export function Post() {
           <button type="button" onClick={handleAdd}>＋サブタイトルを追加する</button>
         </div>
       </section>
+      {showAlert && <Alert />}
     </>
   );
 }

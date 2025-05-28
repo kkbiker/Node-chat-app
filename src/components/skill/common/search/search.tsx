@@ -1,23 +1,23 @@
 'use client';
 
-import { useSkillContext } from "@/context/Skill/SkillContext";
+import axios from "axios";
 import { useCallback, useState } from "react";
 
-import styles from "./search.module.css";
-import axios from "axios";
+import { useSkillContext } from "@/context/Skill/SkillContext";
 import { GenreList } from "../genreList/genreList";
+import { StatusList } from "../statusList/statusList";
+import styles from "./search.module.css";
 
 export function Search() {
-  const { isPost, isPreview, isArticleEdit, setIsArticleList, setIsArticleGenre, handleReset } = useSkillContext();
+  const { isPost, isPreview, isArticleEdit, isPostList, search, setSearch, setArticles, setIsArticleList, setIsArticleGenre, handleReset } = useSkillContext();
 
-  const [search, setSearch] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
 
   const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setIsEmpty(false);
     const value = e.target.value.trim();
     setSearch(value);
-  }, []);
+  }, [setSearch]);
 
   const handleSendSearch = useCallback(() => {
     if (search === "") {
@@ -31,26 +31,27 @@ export function Search() {
     }
 
     axios
-      .get(`${process.env.NEXT_PUBLIC_JAVA_API_URL}/skill/search`,
+      .get(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/findArticlesByTitle`,
         { params: { search } }
       )
-      .then(() => {
+      .then((res) => {
+        setArticles(res.data);
         handleReset();
         setIsArticleList(false);
         setIsArticleGenre(true);
       })
       .catch((err) => console.error(err));
-  }, [search, handleReset, setIsArticleList, setIsArticleGenre]);
+  }, [search, setArticles, handleReset, setIsArticleList, setIsArticleGenre]);
 
   return (
     <>
       {(!isPost && !isPreview && !isArticleEdit) &&
         <div className={styles.container}>
           <div className={styles.search}>
-            <GenreList />
+            {isPostList ? <StatusList /> : <GenreList />}
             <div className={styles.inputBx}>
               <input type="text" value={search} placeholder="記事検索" onChange={handleSearch} />
-              <button type="button" onClick={handleSendSearch}>🔍</button>
+              {!isPostList && <button type="button" onClick={handleSendSearch}>🔍</button>}
             </div>
           </div>
           {isEmpty && <h4>検索項目を入力してください。</h4>}

@@ -1,0 +1,47 @@
+.container {
+    position: relative;
+}
+
+.container button {
+    padding: .8rem 1.6rem;
+    background: transparent;
+    border: solid 1px var(--foreground);
+    border-radius: 3.2rem;
+    color: var(--foreground);
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    cursor: pointer;
+}
+
+.container button.show {
+    background: var(--foreground);
+    border: solid 1px var(--foreground);
+    color: var(--background);
+}
+
+.container>div {
+    position: absolute;
+    z-index: 10;
+    top: 4rem;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    width: 20rem;
+    height: fit-content;
+    max-height: 40rem;
+    padding: 2.8rem .8rem;
+    background: var(--background);
+    border: solid 1px var(--foreground);
+    border-radius: 2rem;
+}
+
+.container>div h5 {
+    padding: .4rem 1.2rem;
+    cursor: pointer;
+}
+
+.container>div h5:hover {
+    background: #0ff;
+    color: #070707;
+}

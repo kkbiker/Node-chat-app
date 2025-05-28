@@ -180,7 +180,7 @@ export function Header({ postGenre, title, titleImg, isTitleSize, description, i
     handleReset();
     setIsArticleList(false);
     setIsPreview(true);
-  }, [postId, errorCheck, handleUpdate, handleSave, handleReset, setIsArticleList, setIsPreview]);
+  }, [postId, isEditing, errorCheck, handleUpdate, handleSave, handleReset, setIsArticleList, setIsPreview]);
 
   return (
     <div className={styles.container}>

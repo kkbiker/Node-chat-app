@@ -16,9 +16,13 @@ export function Comment() {
 
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
+  const [isCommentEmpty, setIsCommentEmpty] = useState(false);
+  const [isCommentSize, setIsCommentSize] = useState(false);
 
   const handleComment = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    setIsCommentEmpty(!(value.trim().length > 0));
+    setIsCommentSize(value.length > 200);
     setComment(value);
   }, []);
 
@@ -34,6 +38,11 @@ export function Comment() {
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (comment.trim().length === 0 || isCommentSize) { 
+      setIsCommentEmpty(true);
+      return; 
+    }
+
     axios
       .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/skill/insertComment`, {userId, articleId, comment})
       .then((res) => {
@@ -41,7 +50,7 @@ export function Comment() {
         setComment("");
       })
       .catch((err) => console.error(err));
-  }, [comment, userId, articleId]);
+  }, [comment, userId, articleId, isCommentSize]);
 
   return (
     <section className={styles.container}>
@@ -50,6 +59,9 @@ export function Comment() {
         <input type="text" value={comment} onChange={handleComment} />
         <button type="submit">送信</button>
       </form>
+      {isCommentEmpty && <h4 className={styles.errormessage}>コメントを入力してください。</h4>}
+      {isCommentSize && <h4 className={styles.errormessage}>コメントは200文字以内で入力してください。</h4>}
+      <p></p>
       <ul className={styles.commentBx}>
         {comments.map(comment => (
           <li key={comment.id} className={`${userId === comment.user_id ? styles.userComment : ""}`}>
