@@ -1,0 +1,37 @@
+.container {
+    position: absolute;
+    z-index: 1000000;
+    top: 6rem;
+    right: 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.6rem;
+    background: var(--background);
+    border: solid 1px var(--foreground);
+    border-radius: 2rem;
+}
+
+.container div {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.container div span {
+    width: 3.6rem;
+    height: 3.6rem;
+    border: solid 1px var(--foreground);
+    border-radius: .8rem;
+    overflow: hidden;
+    line-height: 3.6rem;
+}
+
+.container div p {
+    width: 24rem;
+    text-wrap: nowrap;
+}

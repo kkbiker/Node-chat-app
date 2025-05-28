@@ -37,6 +37,7 @@
 }
 
 .contentBx {
+    position: relative;
     display: flex;
     gap: 1.6rem;
 }
