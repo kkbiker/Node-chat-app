@@ -46,6 +46,14 @@ type SkillContext = {
   genres: Genre[],
   genre: string,
   articles: Article[],
+  isAllStatus: boolean,
+  setIsAllStatus: (value: boolean) => void,
+  isPublicStatus: boolean,
+  setIsPublicStatus: (value: boolean) => void,
+  isPrivateStatus: boolean,
+  setIsPrivateStatus: (value: boolean) => void,
+  isEditStatus: boolean,
+  setIsEditStatus: (value: boolean) => void,
   setUserId: (value: number) => void,
   setGenreId: (value: number) => void,
   setPostId: (value: number) => void,
@@ -62,6 +70,16 @@ type SkillContext = {
   setArticles: (value: Article[]) => void,
   setIsEditing: (value: boolean) => void,
   handleReset: () => void,
+  search: string,
+  setSearch: (value: string) => void,
+  handleHeader: (head: string) => void,
+  ChangeView: (head: string) => void,
+  showAlert: boolean,
+  setShowAlert: (value: boolean) => void,
+  showFavoriteList: boolean,
+  setShowFavoriteList: (value: boolean) => void,
+  whHead: string,
+  setWhHead: (value: string) => void
 }
 
 const SkillContext = createContext<SkillContext | null>(null);
@@ -86,6 +104,12 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
   const [genre, setGenre] = useState("");
   const [articles, setArticles] = useState<Article[]>([]);
 
+  const [isAllStatus, setIsAllStatus] = useState(false);
+  const [isPublicStatus, setIsPublicStatus] = useState(false);
+  const [isPrivateStatus, setIsPrivateStatus] = useState(false);
+  const [isEditStatus, setIsEditStatus] = useState(false);
+  const [search, setSearch] = useState("");
+
   const handleReset = () => {
     setIsAdmin(false);
     setIsPost(false);
@@ -95,6 +119,39 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
     setIsArticleEdit(false);
     setIsArticleGenre(false);
     setIsPreview(false);
+  };
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [showFavoriteList, setShowFavoriteList] = useState(false);
+  const [whHead, setWhHead] = useState("");
+
+  const handleHeader = (head: string) => {
+    if (isEditing) {
+      setShowAlert(true);
+      setWhHead(head);
+      return;
+    }
+
+    ChangeView(head);
+  }
+
+  const ChangeView = (head: string)=> {
+    handleReset();
+    setIsEditing(false);
+    setShowAlert(false);
+    
+    if (head === "head") { return }
+
+    setIsArticleList(false);
+    if (head === "favorite") {
+      setShowFavoriteList(true);
+    } else if (head === "admin") {
+      setIsAdmin(true);
+    } else if (head === "post") {
+      setIsPost(true);
+    } else if (head === "postList") {
+      setIsPostList(true);
+    }
   }
 
   useEffect(() => {
@@ -132,6 +189,14 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
       genre,
       articles,
       isEditing,
+      isAllStatus,
+      setIsAllStatus,
+      isPublicStatus,
+      setIsPublicStatus,
+      isPrivateStatus,
+      setIsPrivateStatus,
+      isEditStatus,
+      setIsEditStatus,
       setUserId,
       setGenreId,
       setPostId,
@@ -147,7 +212,17 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
       setGenre,
       setArticles,
       handleReset,
-      setIsEditing
+      setIsEditing,
+      search,
+      setSearch,
+      handleHeader,
+      ChangeView,
+      showAlert,
+      setShowAlert,
+      showFavoriteList,
+      setShowFavoriteList,
+      whHead,
+      setWhHead
     }}>
       {children}
     </SkillContext.Provider>

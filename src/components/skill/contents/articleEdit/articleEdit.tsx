@@ -6,12 +6,13 @@ import axios from "axios";
 import { Header } from "../post/header/header";
 import { GenreList } from "../../common/genreList/genreList";
 import { Subpost } from "../post/subpost/subpost";
+import { Alert } from "../../common/alert/alert";
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import { useSkillInput } from "@/hooks/skill/useSkillInput";
 import styles from "./articleEdit.module.css";
 
 export function ArticleEdit() {
-  const { articleId, setGenreId, setGenre } = useSkillContext();
+  const { articleId, setGenreId, setGenre, showAlert } = useSkillContext();
 
   const { subposts, setSubposts, title, setTitle, description, setDescription, titleImg, setTitleImg, postGenre, setPostGenre, isPostGenreEmpty, setIsPostGenreEmpty, handleTitle, isTitleEmpty, isTitleSize, setIsTitleEmpty, handleDescription, isDescriptionEmpty, setIsDescriptionEmpty, isDescriptionSize, fileInputRef, handleFile, handleFileDelete, fileSizeOver, handleSubTitle, handleContent, handleSubImg, handleDeleteSubImg, handlereduse, subpostserrors, setSubposterrors, subFileInputRefs, handleAdd } = useSkillInput();
 
@@ -107,6 +108,7 @@ export function ArticleEdit() {
           <button type="button" onClick={handleAdd}>＋サブタイトルを追加する</button>
         </div>
       </section>
+      {showAlert && <Alert />}
     </>
   );
 
