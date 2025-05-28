@@ -45,7 +45,7 @@
 }
 
 .contentBx h4 {
-    max-height: 7rem;
+    max-height: 6.8rem;
     overflow: hidden;
 }
 
@@ -69,4 +69,25 @@
 
 .contentBx div p:nth-child(even).yellow {
     background: #FFEC00;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.4rem;
+    gap: .8rem;
+}
+
+.pagination button {
+    padding: .4rem 1.2rem;
+    border: none;
+    background: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.pagination .activePage {
+    background: var(--foreground);
+    color: var(--background);
+    font-weight: bold;
 }
