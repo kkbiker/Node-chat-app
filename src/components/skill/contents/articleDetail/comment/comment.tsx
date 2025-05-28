@@ -3,7 +3,7 @@ import styles from "./comment.module.css";
 import axios from "axios";
 import { useSkillContext } from "@/context/Skill/SkillContext";
 
-export function Comment() {
+export function Comment({handleShowProblem}: {handleShowProblem: () => void}) {
   const {userId, articleId} = useSkillContext();
 
   type Comment = {
@@ -74,7 +74,7 @@ export function Comment() {
         ))}
       </ul>
       <div className={styles.btnBx}>
-        <button type="button">管理者に問題を報告する</button>
+        <button type="button" onClick={handleShowProblem}>管理者に問題を報告する</button>
       </div>
     </section>
   );

@@ -6,10 +6,16 @@ import Image from "next/image";
 
 import { useSkillContext } from "@/context/Skill/SkillContext";
 import { Comment } from "./comment/comment";
+import { Problem } from "./problem/problem";
 import styles from "./articleDetail.module.css";
 
 export function ArticleDetail() {
   const { articleId, userId } = useSkillContext();
+  const [showProblem, setShowProblem] = useState(false);
+
+  const handleShowProblem = () => {
+    setShowProblem((prev) => !prev);
+  }
 
   type Article = {
     subgenreId: number
@@ -92,7 +98,8 @@ export function ArticleDetail() {
             </div>
           ))}
       </section>
-      <Comment />
+      <Comment handleShowProblem={handleShowProblem} />
+      {showProblem && <Problem articleId={articleId} handleShowProblem={handleShowProblem} />}
     </>
   );
 }
