@@ -72,12 +72,10 @@ type SkillContext = {
   handleReset: () => void,
   search: string,
   setSearch: (value: string) => void,
-  handleHeader: (head: string) => void,
-  ChangeView: (head: string) => void,
+  handleHeader: (head: string, articleId: number) => void,
+  ChangeView: (head: string, articleId: number) => void,
   showAlert: boolean,
   setShowAlert: (value: boolean) => void,
-  showFavoriteList: boolean,
-  setShowFavoriteList: (value: boolean) => void,
   whHead: string,
   setWhHead: (value: string) => void
 }
@@ -122,20 +120,21 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const [showAlert, setShowAlert] = useState(false);
-  const [showFavoriteList, setShowFavoriteList] = useState(false);
   const [whHead, setWhHead] = useState("");
 
-  const handleHeader = (head: string) => {
+  const handleHeader = (head: string, favoriteId: number) => {
+    console.log(favoriteId);
+
     if (isEditing) {
       setShowAlert(true);
       setWhHead(head);
       return;
     }
 
-    ChangeView(head);
+    ChangeView(head, favoriteId);
   }
 
-  const ChangeView = (head: string)=> {
+  const ChangeView = (head: string, favoriteId: number)=> {
     handleReset();
     setIsEditing(false);
     setShowAlert(false);
@@ -143,14 +142,15 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
     if (head === "head") { return }
 
     setIsArticleList(false);
-    if (head === "favorite") {
-      setShowFavoriteList(true);
-    } else if (head === "admin") {
+    if (head === "admin") {
       setIsAdmin(true);
     } else if (head === "post") {
       setIsPost(true);
     } else if (head === "postList") {
       setIsPostList(true);
+    } else if (head === "favorite") {
+      setArticleId(favoriteId);
+      setIsArticleDetail(true);
     }
   }
 
@@ -219,8 +219,6 @@ export const SkillProvider = ({ children }: { children: React.ReactNode }) => {
       ChangeView,
       showAlert,
       setShowAlert,
-      showFavoriteList,
-      setShowFavoriteList,
       whHead,
       setWhHead
     }}>

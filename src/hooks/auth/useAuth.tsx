@@ -2,10 +2,12 @@
 
 import { useNavContext } from "@/context/Header/NavContext";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
 export const useAuth = () => {
-  const { handleSkill } = useNavContext();
+  const {handleSkill} = useNavContext();
+  const router = useRouter();
 
   const [isMaster, setIsMaster] = useState(false);
   const [companyName, setCompanyName] = useState("");
@@ -95,7 +97,7 @@ export const useAuth = () => {
     axios
       .post(`${process.env.NEXT_PUBLIC_NODE_API_URL}/register`, { companyName, companyId, name, email, password })
       .then(() => {
-        handleSkill();
+        router.push("/");
       })
       .catch(() => {
         setRegistErr(true);
@@ -104,7 +106,7 @@ export const useAuth = () => {
           setRegistErr(false);
         }, 3000);
       });
-  }, [isMaster, companyName, isCompanyNameSize, companyId, name, isNameSize, email, password, isPasswordSize, handleSkill]);
+  }, [router, isMaster, companyName, isCompanyNameSize, companyId, name, isNameSize, email, password, isPasswordSize]);
 
   const handleLogin = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
