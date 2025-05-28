@@ -1,13 +1,33 @@
 'use client';
 
-import styles from "./list.module.css";
-import { useSkillContext } from "@/context/Skill/SkillContext";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSkillContext } from "@/context/Skill/SkillContext";
+import styles from "./list.module.css";
 
 export function List() {
 
   const { companyId, articles, setArticleId, setIsArticleList, setIsArticleDetail, handleReset, setArticles } = useSkillContext();
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 10;
+
+  const indexOfLastArticle = currentPage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  const currentArticles = articles.slice(indexOfFirstArticle, indexOfLastArticle);
+
+  const totalPages = Math.ceil(articles.length / articlesPerPage);
+
+  const handlePrev = () => {
+    if (currentPage === 1) { return }
+
+    setCurrentPage((prev) => prev - 1);
+  }
+
+  const handleNext = () => {
+    if (currentPage === totalPages) { return }
+
+    setCurrentPage((prev) => prev + 1);
+  }
 
   useEffect(() => {
     axios
@@ -21,7 +41,7 @@ export function List() {
   return (
     <>
       <section className={styles.container}>
-        {articles.map((article) => (
+        {currentArticles.map((article) => (
           <div key={article.id} className={styles.content} onClick={() => { setArticleId(article.id); handleReset(); setIsArticleList(false); setIsArticleDetail(true) }}>
             <div className={styles.imgBx}>
               <p>{article.subgenre_name}</p>
@@ -39,6 +59,22 @@ export function List() {
           </div>
         ))}
       </section>
+
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button type="button" onClick={handlePrev}>前のページ</button>
+          {[...Array(totalPages)].map((_, idx) => (
+            <button
+              key={idx}
+              className={currentPage === idx + 1 ? styles.activePage : ""}
+              onClick={() => setCurrentPage(idx + 1)}
+            >
+              {idx + 1}
+            </button>
+          ))}
+          <button type="button" onClick={handleNext}>次のページ</button>
+        </div>
+      )}
     </>
   );
 }
